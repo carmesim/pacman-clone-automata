@@ -19,7 +19,6 @@ function draw(){
     player.move(dir);
     print(dir)
     ai1.draw();
-    // //(10*random())%4
     ai1.move(dir_ai1);
     //ai2.draw();
     // ai2.move(dir_ai2)
@@ -44,41 +43,4 @@ function keyPressed() {
     dir = 3;
   }
   return false; // prevent default
-}
-
-function pac (color){
-    this.vel = 2;
-    this.x = width/2;
-    this.y = height/2;
-    this.color = color
-
-    this.draw = function(){
-        fill(this.color);
-        circle(this.x,this.y,r);
-
-    };
-
-    this.move = function(dir_v){
-        if (dir_v == 0) {
-            next_y  = this.y - this.vel;
-            if(next_y >= r/2){
-                this.y = next_y;
-            }
-        } else if (dir_v == 1) {
-            next_y  = this.y + this.vel;
-            if(next_y <= height - r/2){
-                this.y = next_y;
-            }
-        } else if (dir_v == 2) {;
-            next_x  = this.x - this.vel;
-            if(next_x >= r/2){
-                this.x = next_x;
-            }
-        } else if (dir_v == 3) {
-            next_x  = this.x + this.vel;
-            if(next_x <= width - r/2){
-                this.x = next_x;
-            }
-        }
-    };
 }
