@@ -2,7 +2,7 @@
 class pac {
     
     constructor(color){
-        this.vel = 2;
+        this.vel = 5;
         this.x = width/2;
         this.y = height/2;
         this.color = color

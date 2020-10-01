@@ -17,6 +17,7 @@ function setup (){
 
 function draw(){
     background(0);
+    
     player.draw(); 
     player.move(dir);
     print(dir_ai1);
@@ -33,6 +34,9 @@ function draw(){
     count += 1;
 
 }
+
+// I believe that the obstacle checking will have to be inside this function
+// cause the obstacle can be seen as a "you can't go to that direction" signal
 
 function keyPressed() {
   if (keyCode === UP_ARROW) {
