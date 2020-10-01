@@ -4,27 +4,29 @@ let palyer;
 let dir = 2;
 let r = 50;
 let count = 0;
-let dir_ai1 = 3;
+let dir_ai1;
 let dir_ai2 = 1;
+
 function setup (){
     createCanvas(400,800);
     background(0);
     player = new pac('yellow');
     ai1 = new pac('blue');
+    dir_ai1 = 3;
 }
 
 function draw(){
     background(0);
     player.draw(); 
     player.move(dir);
-    print(dir)
+    print(dir_ai1);
     ai1.draw();
     ai1.move(dir_ai1);
     //ai2.draw();
     // ai2.move(dir_ai2)
 
     if(count % 33 == 0){
-        dir_ai1 = (10*random())%4;
+        dir_ai1 = floor(10*random())%4;
         count = 0
     }
     
