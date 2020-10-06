@@ -1,13 +1,13 @@
 let sclX = 4;
 let sclY = 8;
-let palyer;
+let player;
 let dir = 2;
 let r = 50;
 let count = 0;
 let dir_ai1;
 let dir_ai2 = 1;
 let img;
-let colr;
+let color;
 
 function preload() {
   img = loadImage('https://i.imgur.com/566ucfj.png');
@@ -26,12 +26,7 @@ function draw(){
     // We could use a mask that is the img but with thicker walls
     //this way we can 'predict' if the player is close enough to a wall
     
-    
-    
-    
     player.draw(); 
-
-
     
     //this is ugly
     // maybe we should improve it and move to a function (or pac method)
@@ -42,10 +37,8 @@ function draw(){
     let col_right = img.get(player.x + 25,player.y)[0]
     //Note that if the thickness of the wall is less than the radius of the player
     //some bugs can ocurr
-    if((0 == col_up && dir == 0) ||(col_down == 0 && dir ==1)|| (col_left == 0 && dir == 2) ||(col_right == 0 && dir == 3)){ 
-
-    }else {
-        player.move(dir);    
+    if(!((0 == col_up && dir == 0) ||(col_down == 0 && dir ==1)|| (col_left == 0 && dir == 2) ||(col_right == 0 && dir == 3))){ 
+      player.move(dir);
     }
     
     ai1.draw();
@@ -55,11 +48,10 @@ function draw(){
 
     if(count % 33 == 0){
         dir_ai1 = floor(10*random())%4;
-        count = 0
+        count = 0;
     }
     
     count += 1;
-
 }
 
 // I believe that the obstacle checking will have to be inside this function
