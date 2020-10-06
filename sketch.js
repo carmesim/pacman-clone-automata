@@ -10,22 +10,22 @@ let img;
 let colr;
 
 function preload() {
-  map = loadImage('https://i.imgur.com/nYu5dwI.png');
+  img = loadImage('https://i.imgur.com/nYu5dwI.png');
   
 }
 function setup() {
     createCanvas(400,800);
-    background(map);
+    background(img);
     player = new pac('yellow');
     ai1 = new pac('blue');
     dir_ai1 = 3;
 }
 
 function draw(){
-    background(map);
-    // We could use a mask that is the map but with thicker walls
+    background(img);
+    // We could use a mask that is the img but with thicker walls
     //this way we can 'predict' if the player is close enough to a wall
-    colr = map.get(player.x,player.y) //gets the color of the player's position
+    colr = img.get(player.x,player.y) //gets the color of the player's position
     print(colr[0])
     player.draw(); 
     player.move(dir);
