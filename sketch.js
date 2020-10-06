@@ -10,7 +10,7 @@ let img;
 let colr;
 
 function preload() {
-  img = loadImage('https://i.imgur.com/nYu5dwI.png');
+  img = loadImage('https://i.imgur.com/566ucfj.png');
   
 }
 function setup() {
@@ -25,14 +25,30 @@ function draw(){
     background(img);
     // We could use a mask that is the img but with thicker walls
     //this way we can 'predict' if the player is close enough to a wall
-    colr = img.get(player.x,player.y) //gets the color of the player's position
-    print(colr[0])
+    
+    
+    
+    
     player.draw(); 
-    player.move(dir);
-    ai1.draw();
 
-    fill(colr);
-    ellipse(50,50,50,50)
+
+    
+    //this is ugly
+    // maybe we should improve it and move to a function (or pac method)
+    // this way we can apply it to the ai too
+    let col_up = img.get(player.x,player.y-25)[0] 
+    let col_down = img.get(player.x,player.y+25)[0] 
+    let col_left = img.get(player.x - 25,player.y)[0]
+    let col_right = img.get(player.x + 25,player.y)[0]
+    //Note that if the thickness of the wall is less than the radius of the player
+    //some bugs can ocurr
+    if((0 == col_up && dir == 0) ||(col_down == 0 && dir ==1)|| (col_left == 0 && dir == 2) ||(col_right == 0 && dir == 3)){ 
+
+    }else {
+        player.move(dir);    
+    }
+    
+    ai1.draw();
     ai1.move(dir_ai1);
     //ai2.draw();
     // ai2.move(dir_ai2)
