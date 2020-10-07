@@ -19,6 +19,7 @@ function setup() {
     player = new pac('yellow');
     ai1 = new pac('blue');
     dir_ai1 = 3;
+    ideal_tracking = createVector(height/2, width/2);
 }
 
 function draw(){
@@ -26,22 +27,20 @@ function draw(){
     // We could use a mask that is the img but with thicker walls
     //this way we can 'predict' if the player is close enough to a wall
     
-    player.draw(); 
-    
-    //this is ugly
-    // maybe we should improve it and move to a function (or pac method)
-    // this way we can apply it to the ai too
-    player.move_if_possible(dir);
-    
-    ai1.draw();
-    ai1.move_if_possible(dir_ai1);
+    player.draw();
 
-    if(count % 33 == 0){
-        dir_ai1 = floor(10*random())%4;
-        count = 0;
-    }
+    player.move_if_possible(dir);
+
+    ai1.draw();
+    // ai1.move_if_possible(dir_ai1);
     
-    count += 1;
+    track(player.x, player.y);  // Updates ideal_tracking
+
+    ai1.x = ideal_tracking.x;
+    ai1.y = ideal_tracking.y;
+
+    
+    //count += 1;
 }
 
 // I believe that the obstacle checking will have to be inside this function
@@ -58,4 +57,19 @@ function keyPressed() {
     dir = 3;
   }
   return false; // prevent default
+}
+
+//! track(int objX, int objY, int curX, int curY)
+//! Returns the direction to go to in order to 
+//! get closer to (objX, objY), the objective point.
+function track(objX, objY)
+{
+  //! Finding the ideal point to go to
+  var target = createVector(objX, objY);
+  var distance = target.dist(ideal_tracking);
+  var mapped_distance = map(distance, 100, 0, 1.5, 0.5);
+  target.sub(ideal_tracking);
+  target.normalize();
+  target.mult(mapped_distance);
+  ideal_tracking.add(target);
 }

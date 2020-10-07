@@ -1,4 +1,3 @@
-
 class pac 
 {
     constructor(color)
