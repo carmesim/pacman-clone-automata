@@ -8,40 +8,46 @@ let dir_ai1;
 let dir_ai2 = 1;
 let img;
 let color;
+let map_width = 360;
+let map_height = 397;
 
 function preload() {
-  img = loadImage('https://i.imgur.com/X6ZZWHF.png');
+  //https://i.imgur.com/X6ZZWHF.png
+  img = loadImage('https://i.imgur.com/P6eL57x.png');
+
   
 }
 function setup() {
-    createCanvas(360,397);
-    sclX = width/28 - 1;
-    sclY = 1.025*height/36 + 1;
+    createCanvas(601,397);
+    sclX = map_width/28 - 1;
+    sclY = 1.025*map_height/36 + 1;
     background(img);
-    frameRate(4)
+    frameRate(6)
     player = new pac('yellow');
-    ai1 = new pac('blue');
-    dir_ai1 = 3;
-    ideal_tracking = createVector(height/2, width/2);
+    //ai1 = new pac('blue');
+    //dir_ai1 = 3;
+    //ideal_tracking = createVector(map_height/2, map_width/2);
 }
 
 function draw(){
     background(img);
-    gridLines();
+    //gridLines();
     // We could use a mask that is the img but with thicker walls
     //this way we can 'predict' if the player is close enough to a wall
     
     player.draw();
     player.update();
+
+    drawAutomata();
     //player.move_if_possible(dir);
 
-    ai1.draw();
+    //ai1.draw();
     // ai1.move_if_possible(dir_ai1);
     
-    track(player.x, player.y);  // Updates ideal_tracking
+    //track(player.x, player.y);  // Updates ideal_tracking
 
-    ai1.x = ideal_tracking.x;
-    ai1.y = ideal_tracking.y;
+    //ai1.x = ideal_tracking.x;
+    //ai1.y = ideal_tracking.y;
 
     
     //count += 1;
@@ -83,11 +89,44 @@ function track(objX, objY)
 }
 function gridLines(){
   stroke(50);
-  for(let i = 0; i <= width + sclX; i += sclX){
-    line(i,0, i, height);
+  for(let i = 0; i <= map_width + sclX; i += sclX){
+    line(i,0, i, map_height);
   }
-  for(let i = 0; i <= height + sclY; i += sclY){
-    line(0,i, width, i);
+  for(let i = 0; i <= map_height + sclY; i += sclY){
+    line(0,i, map_width, i);
   }
+}
+
+function drawAutomata(){
+  circle(map_width +  90,120,30);
+  fill(0);
+  textSize(18);
+  stroke (100);
+  text('A', map_width  + 82, 125);
+  stroke (100);
+  fill("yellow");
+  strokeWeight(3);
+  stroke ("#27d817");
+  circle(map_width +  170,120,30);
+  fill(0);
+  stroke (100);
+  strokeWeight(1);
+  text('B', map_width  + 165, 125);
+  stroke (100);
+  strokeWeight(2);
+  noFill()
+  arc(map_width + 130, 140, 80, 105, PI + QUARTER_PI , TWO_PI - QUARTER_PI);
+  arc(map_width + 130, 135, 80, 80, HALF_PI, PI );
+  arc(map_width + 130, 135, 80, 80, TWO_PI, HALF_PI );
+  line(map_width + 105,120, map_width +  155,120);
+  line(map_width + 105,120, map_width +  130,165);
+  line(map_width +  130,165, map_width +  155,120);  
+  fill("yellow");
+  strokeWeight(1);
+  circle(map_width +  130,170,30);
+  fill(0);
+  stroke (100);
+  strokeWeight(1);
+  text('C', map_width  + 122, 175);
 
 }
