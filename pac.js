@@ -2,11 +2,25 @@ class pac
 {
     constructor(color)
     {
-        this.vel = 1;
-        this.x = width/2;
-        this.y = height/2;
+        this.vel = 0.1;
+        this.speedX = 1;
+        this.speedY = 0;
+        this.x = 2.5*sclX;
+        this.y = height - 2.5*sclY;
         this.color = color;
     }
+    dir(dirX, dirY){
+        this.speedX = dirX;
+        this.speedY = dirY;
+    };
+
+    update(){
+        this.x += this.speedX*sclX;
+        this.y += this.speedY*sclY;
+
+        this.x = constrain(this.x,  2.5*sclX , width - 2.5*sclX )
+        this.y = constrain(this.y, 2.5*sclY , height - 2.5*sclY )
+    };
 
     move_if_possible(ndir)
     {
@@ -20,7 +34,6 @@ class pac
         {
             this.move(ndir);
         }
-
         this.move(ndir);
     };
 
@@ -34,16 +47,16 @@ class pac
        switch(dir_v)
        {
            case 0:  // Going up
-               this.y -= this.y - this.vel >= r/2 ? this.vel : 0;
+               this.y -= this.y - this.vel >= r/2 ? this.vel*scl : 0;
             break;
             case 1: // Going down
-                this.y += this.y + this.vel <= height - r/2 ? this.vel : 0;
+                this.y += this.y + this.vel <= height - r/2 ? this.vel*scl : 0;
             break;
             case 2: // Going left
-                this.x -= this.x - this.vel >= r/2 ? this.vel : 0;
+                this.x -= this.x - this.vel >= r/2 ? this.vel*scl : 0;
             break;
             case 3: // Going right
-                this.x += this.x + this.vel <= width -r/2 ? this.vel : 0;
+                this.x += this.x + this.vel <= width -r/2 ? this.vel*scl : 0;
             break;
             default:
                 // Should be unreachable
