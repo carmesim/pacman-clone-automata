@@ -2,7 +2,7 @@ class pac
 {
     constructor(color)
     {
-        this.vel = 5;
+        this.vel = 1;
         this.x = width/2;
         this.y = height/2;
         this.color = color;
@@ -20,6 +20,8 @@ class pac
         {
             this.move(ndir);
         }
+
+        this.move(ndir);
     };
 
     draw()

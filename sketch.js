@@ -2,7 +2,7 @@ let sclX = 4;
 let sclY = 8;
 let player;
 let dir = 2;
-let r = 50;
+let r = 8;
 let count = 0;
 let dir_ai1;
 let dir_ai2 = 1;
@@ -10,12 +10,13 @@ let img;
 let color;
 
 function preload() {
-  img = loadImage('https://i.imgur.com/566ucfj.png');
+  img = loadImage('https://i.imgur.com/uDuqWxR.png');
   
 }
 function setup() {
-    createCanvas(400,800);
+    createCanvas(164,212);
     background(img);
+    frameRate(30)
     player = new pac('yellow');
     ai1 = new pac('blue');
     dir_ai1 = 3;
@@ -70,6 +71,6 @@ function track(objX, objY)
   var mapped_distance = map(distance, 100, 0, 1.5, 0.5);
   target.sub(ideal_tracking);
   target.normalize();
-  target.mult(mapped_distance);
+  target.mult(0.5*mapped_distance);
   ideal_tracking.add(target);
 }
