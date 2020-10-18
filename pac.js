@@ -2,50 +2,33 @@ class pac
 {
     constructor(color)
     {
-        this.speedX = 1;
-        this.speedY = 0;
         this.x = 2.5*sclX;
         this.y = 2.5*sclY;
         this.color = color;
     }
-    dir(dirX, dirY){
-        this.speedX = dirX;
-        this.speedY = dirY;
-        this.colisions();
-    };
 
-    update()
-    {
-        this.x += this.speedX*sclX;
-        this.y += this.speedY*sclY;
-        
-        this.colisions();
-        
-        this.x = constrain(this.x,  3*sclX , map_width - 3*sclX );
-        this.y = constrain(this.y, 3*sclY , map_height - 3*sclY );
-    };
+    // This method is deactivated for now
 
-    move_if_possible(ndir)
-    {
-        let col_up    = img.get(this.x,this.y-25)[0] 
-        let col_down  = img.get(this.x,this.y+25)[0] 
-        let col_left  = img.get(this.x - 25,this.y)[0]
-        let col_right = img.get(this.x + 25,this.y)[0]
-        // Note that if the thickness of the wall is less than the radius of the player
-        // some bugs can ocurr
-        if(!((0 == col_up && ndir == 0) || (col_down == 0 && ndir ==1)|| (col_left == 0 && ndir == 2) ||(col_right == 0 && ndir == 3)))
-        {
-            this.move(ndir);
-        }
-        this.move(ndir);
-    };
+    // move_if_possible(ndir)
+    // {
+    //     let col_up    = img.get(this.x,this.y-25)[0] 
+    //     let col_down  = img.get(this.x,this.y+25)[0] 
+    //     let col_left  = img.get(this.x - 25,this.y)[0]
+    //     let col_right = img.get(this.x + 25,this.y)[0]
+    //     // Note that if the thickness of the wall is less than the radius of the player
+    //     // some bugs can ocurr
+    //     if(!((0 == col_up && ndir == 0) || (col_down == 0 && ndir ==1)|| (col_left == 0 && ndir == 2) ||(col_right == 0 && ndir == 3)))
+    //     {
+    //         this.move(ndir);
+    //     }
+    //     this.move(ndir);
+    // };
 
     draw()
     {
         fill(this.color);
         circle(this.x,this.y, r);
-        this.x = constrain(this.x,  2.5*sclX , map_width - 2.5*sclX );
-        this.y = constrain(this.y, 2.5*sclY , map_height - 2.5*sclY );
+        
     };
 
     move(dir_v)
@@ -68,6 +51,8 @@ class pac
                 // Should be unreachable
             break;
        }
+       this.x = constrain(this.x,2.5*sclX , 27.5*sclX );
+       this.y = constrain(this.y,2.5*sclY , 29.5*sclY);
     };
     colisions(){
         let row = floor(this.y / sclY);

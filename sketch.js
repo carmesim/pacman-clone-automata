@@ -15,10 +15,8 @@ let mapa;
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
   img = loadImage('https://i.imgur.com/P6eL57x.png');
-  //mapa = loadBytes(getMap());
-  mapa = loadJSON('lion.json')
-  //mapa = loadBytes('https://raw.githubusercontent.com/carmesim/pacman-clone-automata/5a5a7802ab3fc30c8860deef9cad3a967252ac32/Mapa_Pac_man.txt');
-  print(mapa);
+  //mapa = loadJSON('lion.json')
+  
 
   
 }
