@@ -2,7 +2,6 @@ class pac
 {
     constructor(color)
     {
-        this.vel = 0.1;
         this.speedX = 1;
         this.speedY = 0;
         this.x = 2.5*sclX;
@@ -22,8 +21,8 @@ class pac
         
         this.colisions();
         
-        this.x = constrain(this.x,  2.5*sclX , map_width - 2.5*sclX )
-        this.y = constrain(this.y, 2.5*sclY , map_height - 2.5*sclY )
+        this.x = constrain(this.x,  3*sclX , map_width - 3*sclX );
+        this.y = constrain(this.y, 3*sclY , map_height - 3*sclY );
     };
 
     move_if_possible(ndir)
@@ -45,6 +44,8 @@ class pac
     {
         fill(this.color);
         circle(this.x,this.y, r);
+        this.x = constrain(this.x,  2.5*sclX , map_width - 2.5*sclX );
+        this.y = constrain(this.y, 2.5*sclY , map_height - 2.5*sclY );
     };
 
     move(dir_v)
@@ -52,16 +53,16 @@ class pac
        switch(dir_v)
        {
            case 0:  // Going up
-               this.y -= this.y - this.vel >= r/2 ? this.vel*scl : 0;
+               this.y -= sclY ;
             break;
             case 1: // Going down
-                this.y += this.y + this.vel <= map_height - r/2 ? this.vel*scl : 0;
+                this.y += sclY;
             break;
             case 2: // Going left
-                this.x -= this.x - this.vel >= r/2 ? this.vel*scl : 0;
+                this.x -= sclX;
             break;
             case 3: // Going right
-                this.x += this.x + this.vel <= map_width -r/2 ? this.vel*scl : 0;
+                this.x += sclX;
             break;
             default:
                 // Should be unreachable

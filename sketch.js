@@ -10,10 +10,15 @@ let img;
 let color;
 let map_width = 360;
 let map_height = 397;
+let mapa;
 
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
   img = loadImage('https://i.imgur.com/P6eL57x.png');
+  //mapa = loadBytes(getMap());
+  mapa = loadJSON('lion.json')
+  //mapa = loadBytes('https://raw.githubusercontent.com/carmesim/pacman-clone-automata/5a5a7802ab3fc30c8860deef9cad3a967252ac32/Mapa_Pac_man.txt');
+  print(mapa);
 
   
 }
@@ -22,21 +27,26 @@ function setup() {
     sclX = map_width/28 - 1;
     sclY = 1.025*map_height/36 + 1;
     background(img);
-    frameRate(6)
+    frameRate(6);
+
+
     player = new pac('yellow');
+    
     //ai1 = new pac('blue');
+    //ai1.dir()
     //dir_ai1 = 3;
     //ideal_tracking = createVector(map_height/2, map_width/2);
 }
 
 function draw(){
     background(img);
-    //gridLines();
+    gridLines();
     // We could use a mask that is the img but with thicker walls
     //this way we can 'predict' if the player is close enough to a wall
     
     player.draw();
-    player.update();
+    player.move(dir);
+    //player.update();
 
     drawAutomata();
     //player.move_if_possible(dir);
@@ -59,16 +69,16 @@ function draw(){
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     dir = 0;
-    player.dir(0,-1);
+    //player.dir(0,-1);
   } else if (keyCode === DOWN_ARROW) {
     dir = 1;
-    player.dir(0,1);
+    //player.dir(0,1);
   } else if (keyCode === LEFT_ARROW) {;
     dir = 2;
-    player.dir(-1,0);
+    //player.dir(-1,0);
   } else if (keyCode === RIGHT_ARROW) {
     dir = 3;
-    player.dir(1,0);
+    //player.dir(1,0);
   }
   return false; // prevent default
 }
@@ -130,3 +140,18 @@ function drawAutomata(){
   text('C', map_width  + 122, 175);
 
 }
+
+function getMap(){
+  var request = new XMLHttpRequest();
+  request.open('GET', 'https://raw.githubusercontent.com/carmesim/pacman-clone-automata/5a5a7802ab3fc30c8860deef9cad3a967252ac32/Mapa_Pac_man.txt', true);
+  request.send(null);
+  request.onreadystatechange = function () {
+      if (request.readyState === 4 && request.status === 200) {
+          var type = request.getResponseHeader('Content-Type');
+          if (type.indexOf("text") !== 1) {
+              return request.responseText;
+          }
+      }
+  }
+}
+
