@@ -33,23 +33,40 @@ class pac
 
     move(dir_v)
     {
+        let row = floor(this.y / sclY);
+        let col = floor(this.x / sclX);
        switch(dir_v)
        {
-           case 0:  // Going up
-               this.y -= sclY ;
-            break;
+            case 0:  // Going up
+                
+                if (mapa[row+3][col - 1] == 0){
+                    this.y -= sclY ;
+                }
+                break;
             case 1: // Going down
-                this.y += sclY;
-            break;
+                if (mapa[row+5][col - 1] == 0){
+                    this.y += sclY;
+                }
+                break;
             case 2: // Going left
-                this.x -= sclX;
-            break;
+                if (row == 15 && col == 2){
+                    this.x =  27.5*sclX;
+                }
+                if (mapa[row+4][col-2] == 0){
+                    this.x -= sclX;
+                }
+                break;
             case 3: // Going right
-                this.x += sclX;
-            break;
+                if (row == 15 && col == 27){
+                    this.x =  2.5*sclX;
+                }
+                if (mapa[row+4][col] == 0){
+                    this.x += sclX;
+                }
+                break;
             default:
                 // Should be unreachable
-            break;
+                break;
        }
        this.x = constrain(this.x,2.5*sclX , 27.5*sclX );
        this.y = constrain(this.y,2.5*sclY , 29.5*sclY);
@@ -58,23 +75,7 @@ class pac
         let row = floor(this.y / sclY);
         let col = floor(this.x / sclX);
         console.clear();
-        print('linha', row,'coluna: ', col);
-        
-        // This is ridiculous !!
-        switch(row){
-            case 2:
-                if(col == 13 || col == 16){
-                    this.speedX = 0;
-                }else if((col >= 3 && col <= 6)|| (col >=8 && col <=12)|| (col >= 17 && col <= 21)|| (col >=23 && col <=26) ){
-                    this.speedY = 0;
-                }
-                break;
-            case 3:
-                if(col == 2 || col ==7 || col == 13 || col == 16 ){
-                    this.speedX = 0;
-                }
-                break;
-      
-        }
-    }
+        print('linha', row-1,'coluna: ', col-1);
+    
+    };
 }

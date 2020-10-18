@@ -18,16 +18,14 @@ let ghost_btn;
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
   img = loadImage('https://i.imgur.com/P6eL57x.png');
-  //mapa = loadJSON('lion.json')
-
-  
+  mapa = loadJSON('Official_map.json')  
 }
 function setup() {
     createCanvas(601,397);
     sclX = map_width/28 - 1;
     sclY = 1.025*map_height/36 + 1;
     background(img);
-    frameRate(6);
+    frameRate(10);
 
     player = new pac('yellow');
     aut = new automata(player);
@@ -48,12 +46,22 @@ function setup() {
     ghost_btn.style('background-color', "red");
     ghost_btn.style('border', "red");
     ghost_btn.style('border-radius','12px');
+    
+    
 
 }
 
 function draw(){
     background(img);
     gridLines();
+
+    let row = floor(player.y / sclY);
+    let col = floor(player.x / sclX);
+    console.clear();
+    print('linha', row-1,'coluna: ', col-1);
+    print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
+    print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
+    print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
     // We could use a mask that is the img but with thicker walls
     //this way we can 'predict' if the player is close enough to a wall
     
@@ -92,18 +100,24 @@ function draw(){
 // cause the obstacle can be seen as a "you can't go to that direction" signal
 
 function keyPressed() {
+  let row = floor(player.y / sclY);
+  let col = floor(player.x / sclX);
   if (keyCode === UP_ARROW) {
-    dir = 0;
-    //player.dir(0,-1);
+    if (mapa[row+3][col - 1] == 0){
+      dir = 0;
+    }
   } else if (keyCode === DOWN_ARROW) {
-    dir = 1;
-    //player.dir(0,1);
-  } else if (keyCode === LEFT_ARROW) {;
-    dir = 2;
-    //player.dir(-1,0);
+    if (mapa[row+5][col - 1] == 0){
+        dir = 1;
+    }
+  } else if (keyCode === LEFT_ARROW) {
+    if (mapa[row+4][col-2] == 0){
+        dir = 2;
+    }
   } else if (keyCode === RIGHT_ARROW) {
-    dir = 3;
-    //player.dir(1,0);
+    if (mapa[row+4][col] == 0){
+      dir = 3;
+    }
   }
   return false; // prevent default
 }
