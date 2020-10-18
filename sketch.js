@@ -11,12 +11,12 @@ let color;
 let map_width = 360;
 let map_height = 397;
 let mapa;
+let aut;
 
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
   img = loadImage('https://i.imgur.com/P6eL57x.png');
   //mapa = loadJSON('lion.json')
-  
 
   
 }
@@ -27,8 +27,8 @@ function setup() {
     background(img);
     frameRate(6);
 
-
     player = new pac('yellow');
+    aut = new automata(player);
     
     //ai1 = new pac('blue');
     //ai1.dir()
@@ -45,8 +45,10 @@ function draw(){
     player.draw();
     player.move(dir);
     //player.update();
-
-    drawAutomata();
+  
+    aut.update();
+    aut.draw();
+    
     //player.move_if_possible(dir);
 
     //ai1.draw();
@@ -105,39 +107,6 @@ function gridLines(){
   }
 }
 
-function drawAutomata(){
-  circle(map_width +  90,120,30);
-  fill(0);
-  textSize(18);
-  stroke (100);
-  text('A', map_width  + 82, 125);
-  stroke (100);
-  fill("yellow");
-  strokeWeight(3);
-  stroke ("#27d817");
-  circle(map_width +  170,120,30);
-  fill(0);
-  stroke (100);
-  strokeWeight(1);
-  text('B', map_width  + 165, 125);
-  stroke (100);
-  strokeWeight(2);
-  noFill()
-  arc(map_width + 130, 140, 80, 105, PI + QUARTER_PI , TWO_PI - QUARTER_PI);
-  arc(map_width + 130, 135, 80, 80, HALF_PI, PI );
-  arc(map_width + 130, 135, 80, 80, TWO_PI, HALF_PI );
-  line(map_width + 105,120, map_width +  155,120);
-  line(map_width + 105,120, map_width +  130,165);
-  line(map_width +  130,165, map_width +  155,120);  
-  fill("yellow");
-  strokeWeight(1);
-  circle(map_width +  130,170,30);
-  fill(0);
-  stroke (100);
-  strokeWeight(1);
-  text('C', map_width  + 122, 175);
-
-}
 
 function getMap(){
   var request = new XMLHttpRequest();
