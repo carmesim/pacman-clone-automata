@@ -14,6 +14,7 @@ let mapa;
 let aut;
 let player_btn;
 let ghost_btn;
+let power_up_timer = 0;
 
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
@@ -27,11 +28,11 @@ function setup() {
     background(img);
     frameRate(10);
 
-    player = new pac('yellow');
+    player = new pac('yellow',2.5*sclX,2.5*sclY);
     aut = new automata(player);
     
-    ai1 = new pac('red');
-    dir_ai1 = 3;
+    ai1 = new pac('red',15.5*sclX,12.5*sclY);
+    dir_ai1 = 2;
     //ideal_tracking = createVector(map_height/2, map_width/2);
     player_btn = createButton('Pac');
     player_btn.position(map_width + 20, 185);
@@ -57,26 +58,27 @@ function draw(){
 
     let row = floor(player.y / sclY);
     let col = floor(player.x / sclX);
+
+    // prints the surroundings of the player
     console.clear();
     print('linha', row-1,'coluna: ', col-1);
     print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
     print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
     print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
-    // We could use a mask that is the img but with thicker walls
-    //this way we can 'predict' if the player is close enough to a wall
-    
+
     player.draw();
     player.move(dir);
-    //player.update();
+
+    if (mapa[row+4][col - 1] == 2){
+      pac.state = 4; // Powered-up !
+      power_up_timer = 20;
+    }
 
     aut.update();
     aut.draw();
     
-    //player.move_if_possible(dir);
-
     ai1.draw();
     ai1.move(dir_ai1)
-    // ai1.move_if_possible(dir_ai1);
     
     //track(player.x, player.y);  // Updates ideal_tracking
 
@@ -84,13 +86,24 @@ function draw(){
     //ai1.y = ideal_tracking.y;
 
     if(count % 20 == 0){
-        //dir_ai1 = floor(10*random())%4;
+        dir_ai1 = floor(10*random())%4;
         if(dir_ai1 == 2){
             dir_ai1 = 3;
         }else{
             dir_ai1 = 2;
         }
         count = 0
+    }
+
+
+    // this part will change with more ghosts
+    // sorry, guys!
+    if(power_up_timer > 0){
+      power_up_timer --;
+      power_up_timer%2 == 0? ai1.color = "blue": ai1.color = "white";
+    }else if (power_up_timer == 0){
+      player.state = 1;
+      ai1.color = "red";
     }
   
     count += 1;
@@ -103,19 +116,19 @@ function keyPressed() {
   let row = floor(player.y / sclY);
   let col = floor(player.x / sclX);
   if (keyCode === UP_ARROW) {
-    if (mapa[row+3][col - 1] == 0){
+    if (mapa[row+3][col - 1] != 1){
       dir = 0;
     }
   } else if (keyCode === DOWN_ARROW) {
-    if (mapa[row+5][col - 1] == 0){
+    if (mapa[row+5][col - 1] != 1){
         dir = 1;
     }
   } else if (keyCode === LEFT_ARROW) {
-    if (mapa[row+4][col-2] == 0){
+    if (mapa[row+4][col-2] != 1){
         dir = 2;
     }
   } else if (keyCode === RIGHT_ARROW) {
-    if (mapa[row+4][col] == 0){
+    if (mapa[row+4][col] != 1){
       dir = 3;
     }
   }
@@ -146,25 +159,13 @@ function gridLines(){
   }
 }
 
-
-function getMap(){
-  var request = new XMLHttpRequest();
-  request.open('GET', 'https://raw.githubusercontent.com/carmesim/pacman-clone-automata/5a5a7802ab3fc30c8860deef9cad3a967252ac32/Mapa_Pac_man.txt', true);
-  request.send(null);
-  request.onreadystatechange = function () {
-      if (request.readyState === 4 && request.status === 200) {
-          var type = request.getResponseHeader('Content-Type');
-          if (type.indexOf("text") !== 1) {
-              return request.responseText;
-          }
-      }
-  }
-}
+// Sets the player's automata to be vizualized
 function setPlayerAut(){
   aut.pac = player;
   ghost_btn.style('border', "red");
   player_btn.style('border', "2px solid #4CAF50");
 }
+// Sets the Ai1's automata to be vizualized
 function setGhostAut(){
   aut.pac = ai1;
   player_btn.style('border', "yellow");

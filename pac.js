@@ -1,10 +1,12 @@
 class pac 
 {
-    constructor(color)
+    //const States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
+    constructor(color, initX, initY)
     {
-        this.x = 2.5*sclX;
-        this.y = 2.5*sclY;
+        this.x = initX;
+        this.y = initY;
         this.color = color;
+        this.state = 1 //"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4
     }
 
     // This method is deactivated for now
@@ -39,12 +41,12 @@ class pac
        {
             case 0:  // Going up
                 
-                if (mapa[row+3][col - 1] == 0){
+                if (mapa[row+3][col - 1] != 1){
                     this.y -= sclY ;
                 }
                 break;
             case 1: // Going down
-                if (mapa[row+5][col - 1] == 0){
+                if (mapa[row+5][col - 1] != 1){
                     this.y += sclY;
                 }
                 break;
@@ -52,7 +54,7 @@ class pac
                 if (row == 15 && col == 2){
                     this.x =  27.5*sclX;
                 }
-                if (mapa[row+4][col-2] == 0){
+                if (mapa[row+4][col-2] != 1){
                     this.x -= sclX;
                 }
                 break;
@@ -60,7 +62,7 @@ class pac
                 if (row == 15 && col == 27){
                     this.x =  2.5*sclX;
                 }
-                if (mapa[row+4][col] == 0){
+                if (mapa[row+4][col] != 1){
                     this.x += sclX;
                 }
                 break;
