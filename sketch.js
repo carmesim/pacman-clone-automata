@@ -39,15 +39,15 @@ function setup() {
     player_btn.position(map_width + 20, 185);
     player_btn.mousePressed(setPlayerAut);
     player_btn.style('background-color', "yellow");
-    player_btn.style('border', "yellow");
+    player_btn.style('border', "2px solid #4CAF50");
     player_btn.style('border-radius','12px');
 
-    player_btn = createButton('Fantasma');
-    player_btn.position(map_width + 20, 215);
-    player_btn.mousePressed(setGhostAut);
-    player_btn.style('background-color', "red");
-    player_btn.style('border', "red");
-    player_btn.style('border-radius','12px');
+    ghost_btn = createButton('Fantasma');
+    ghost_btn.position(map_width + 20, 215);
+    ghost_btn.mousePressed(setGhostAut);
+    ghost_btn.style('background-color', "red");
+    ghost_btn.style('border', "red");
+    ghost_btn.style('border-radius','12px');
 
 }
 
@@ -148,7 +148,11 @@ function getMap(){
 }
 function setPlayerAut(){
   aut.pac = player;
+  ghost_btn.style('border', "red");
+  player_btn.style('border', "2px solid #4CAF50");
 }
 function setGhostAut(){
   aut.pac = ai1;
+  player_btn.style('border', "yellow");
+  ghost_btn.style('border', "2px solid #4CAF50");
 }
