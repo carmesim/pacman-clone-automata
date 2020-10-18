@@ -12,6 +12,8 @@ let map_width = 360;
 let map_height = 397;
 let mapa;
 let aut;
+let player_btn;
+let ghost_btn;
 
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
@@ -30,10 +32,23 @@ function setup() {
     player = new pac('yellow');
     aut = new automata(player);
     
-    //ai1 = new pac('blue');
-    //ai1.dir()
-    //dir_ai1 = 3;
+    ai1 = new pac('red');
+    dir_ai1 = 3;
     //ideal_tracking = createVector(map_height/2, map_width/2);
+    player_btn = createButton('Pac');
+    player_btn.position(map_width + 20, 185);
+    player_btn.mousePressed(setPlayerAut);
+    player_btn.style('background-color', "yellow");
+    player_btn.style('border', "yellow");
+    player_btn.style('border-radius','12px');
+
+    player_btn = createButton('Fantasma');
+    player_btn.position(map_width + 20, 215);
+    player_btn.mousePressed(setGhostAut);
+    player_btn.style('background-color', "red");
+    player_btn.style('border', "red");
+    player_btn.style('border-radius','12px');
+
 }
 
 function draw(){
@@ -45,13 +60,14 @@ function draw(){
     player.draw();
     player.move(dir);
     //player.update();
-  
+
     aut.update();
     aut.draw();
     
     //player.move_if_possible(dir);
 
-    //ai1.draw();
+    ai1.draw();
+    ai1.move(dir_ai1)
     // ai1.move_if_possible(dir_ai1);
     
     //track(player.x, player.y);  // Updates ideal_tracking
@@ -59,8 +75,17 @@ function draw(){
     //ai1.x = ideal_tracking.x;
     //ai1.y = ideal_tracking.y;
 
-    
-    //count += 1;
+    if(count % 20 == 0){
+        //dir_ai1 = floor(10*random())%4;
+        if(dir_ai1 == 2){
+            dir_ai1 = 3;
+        }else{
+            dir_ai1 = 2;
+        }
+        count = 0
+    }
+  
+    count += 1;
 }
 
 // I believe that the obstacle checking will have to be inside this function
@@ -121,4 +146,9 @@ function getMap(){
       }
   }
 }
-
+function setPlayerAut(){
+  aut.pac = player;
+}
+function setGhostAut(){
+  aut.pac = ai1;
+}

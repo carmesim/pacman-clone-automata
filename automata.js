@@ -1,10 +1,10 @@
 class automata{
 
     constructor(pacObj){
-        
+
         this.pac = pacObj;
 
-        this.colorA = "red";
+        this.colorA = "#64e539";
         this.thicknessA =3;
         this.colorB = "gray";
         this.thicknessB =2;
@@ -17,10 +17,10 @@ class automata{
         if(this.pac.x > map_width/2){
             this.colorA = "gray";
             this.thicknessA =2;
-            this.colorB = "red";
+            this.colorB = "#64e539";
             this.thicknessB =3;
         }else{
-            this.colorA = "red";
+            this.colorA = "#64e539";
             this.thicknessA =3;
             this.colorB = "gray";
             this.thicknessB =2;
