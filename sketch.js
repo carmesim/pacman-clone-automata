@@ -1,5 +1,5 @@
 let player;
-let dir = 2;
+let dir = 4;
 let r = 10;
 let sclX;
 let sclY;
@@ -28,7 +28,7 @@ function setup() {
     background(img);
     frameRate(10);
 
-    player = new pac('yellow',2.5*sclX,2.5*sclY);
+    player = new pac('yellow',15.5*sclX,24.5*sclY);
     aut = new automata(player);
     
     ai1 = new pac('red',15.5*sclX,12.5*sclY);
