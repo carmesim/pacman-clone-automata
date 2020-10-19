@@ -60,18 +60,19 @@ class automata{
                 case 4:
                     this.colorA = "gray";
                     this.thicknessA =2;
-                    this.colorB = "#64e539";
-                    this.thicknessB =3;
-                    this.colorC = "gray";
-                    this.thicknessC =2;
-                    break;
-                case 5:
-                    this.colorA = "gray";
-                    this.thicknessA =2;
                     this.colorB = "gray";
                     this.thicknessB =2;
                     this.colorC = "#64e539";
                     this.thicknessC =3;
+                    break;
+                case 5:
+
+                    this.colorA = "gray";
+                    this.thicknessA =2;
+                    this.colorB = "#64e539";
+                    this.thicknessB =3;
+                    this.colorC = "gray";
+                    this.thicknessC =2;
                     break;
                 
                 default:

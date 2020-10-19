@@ -170,12 +170,18 @@ function draw(){
                 if(num_ghosts_left == 0){ //nao tem mais fantasmas ganhamos o jogo
                     finished = true;
                     won = true;
+                    ai1.state = 5;
+                    aut.update();
+                    aut.draw();
                 }
 
             }else{
                 finished = true;
                 space_pressed = false;
                 won = false;
+                player.state = 5;
+                aut.update();
+                aut.draw();
             }
 
         }
