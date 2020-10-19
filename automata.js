@@ -95,13 +95,36 @@ class automata{
             text('S', map_width  + 117, 195);
             stroke("yellow");
             fill("yellow");
-            textSize(12)
+            textSize(10)
             strokeWeight(1);
             text('r - Renasce', map_width  + 20, 250);
-            text('pp - Pac-man pega power up', map_width  + 20, 270);
-            text('pa - power up acabou', map_width  + 20, 290);
+            text('pp - Pac-man pega power up', map_width  + 20, 265);
+            text('pa - Power up acabou', map_width  + 20, 283);
+            text('pt - Pac-man toca o fantasma', map_width  + 20, 298);
+
+            text ('r', 478,116);
+            
+            push();
+            translate (455,153);
+            rotate (45);
+            text ('pp', 0,0);
+            pop();
+
+            text ('pa', 423,176);   
+
+            push();
+            translate(509,159);
+            rotate (0);
+            text('pt', 0,0);
+            pop();
+
             stroke (0);
             fill(0);
+
+            if (mouseIsPressed){
+            print('Mouse X: ', mouseX, 'Y: ', mouseY);    
+            }
+            
 
         }else{
             fill("yellow");
