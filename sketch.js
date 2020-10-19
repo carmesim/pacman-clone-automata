@@ -69,6 +69,10 @@ function setup() {
 function draw() {
   if (finished == true) {
     // texto de derrota
+
+    fill(0);
+    square (map_width / 2 -8, map_height / 2 -15, 18);
+    
     textSize(32);
     fill('yellow');
     if (won) {
@@ -173,6 +177,7 @@ function draw() {
                   ai1.y = 12.5*sclY;
                   ai1.state = 1;
                   power_up_timer = 0;
+                  player.state = 1;
               }
 
           }else{

@@ -100,7 +100,7 @@ class automata{
             textSize(18);
             stroke (0);
             strokeWeight(1);
-            text('C', map_width  + 62, 125);
+            text('P', map_width  + 62, 125);
 
             stroke (100);
             fill("yellow");
@@ -146,7 +146,7 @@ class automata{
             stroke (0);
             strokeWeight(1);
             fill(0);
-            text('S', map_width  + 117, 195);
+            text('F', map_width  + 117, 195);
             stroke("yellow");
             fill("yellow");
             textSize(10)
@@ -180,7 +180,6 @@ class automata{
             
 
         }else{
-//519    110
             
 
             fill("yellow");
@@ -261,11 +260,7 @@ class automata{
 
             text ('pa', 423,176);   
 
-            push();
-            translate(509,159);
-            rotate (0);
-            text('pt', 0,0);
-            pop();
+            
 
             stroke (0);
             fill(0);
