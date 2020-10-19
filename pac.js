@@ -18,7 +18,7 @@ class pac
     //     let col_down  = img.get(this.x,this.y+25)[0] 
     //     let col_left  = img.get(this.x - 25,this.y)[0]
     //     let col_right = img.get(this.x + 25,this.y)[0]
-    //     // Note that if the thickness of the wall is less than the radius of the player
+    //     // Note that if the thickness of the wall is less than the radius of the pacman
     //     // some bugs can ocurr
     //     if(!((0 == col_up && ndir == 0) || (col_down == 0 && ndir ==1)|| (col_left == 0 && ndir == 2) ||(col_right == 0 && ndir == 3)))
     //     {
@@ -49,15 +49,15 @@ class pac
 
     backtrack()
     {
-        this.move(this.rev_dir);
+        this.move(Math.floor(Math.random() * 5));
     };
 
     //! Updates the behavior of a Ghost
-    AI_update()
+    AI_update(pacman)
     {
 
         //! Primeiros devemos ver qual o estado do Pac-Man
-        if(player.state == States.Normal)
+        if(pacman.state == States.Normal)
         {
             //! Pac-Man normal, então a IA deve segui-lo
             this.state == States.Chase;
@@ -71,12 +71,12 @@ class pac
             Devemos encontrar em qual quadrante o Pac-Man está, de modo a seguir (ou fugir) de acordo.
         !*/
     
-        const diff_x     = Math.abs(player.x, this.x);  //! Distância entre a coord. x entre os dois
-        const diff_y     = Math.abs(player.y, this.y);  //! Distância entre a coord. y entre os dois
-        const pacIsAbove = player.x < this.x;      //! Define se o Pac-Man está acima da IA
-        const pacIsBelow = player.x > this.x;      //! Define se o Pac-Man está abaixo da IA
-        const pacIsToTheRight = player.y > this.y; //! Define se o Pac-Man está à direita da IA
-        const pacIsToTheLeft  = player.y < this.y; //! Define se o Pac-Man está à esquerda da IA
+        const diff_x     = Math.abs(pacman.x, this.x);  //! Distância entre a coord. x entre os dois
+        const diff_y     = Math.abs(pacman.y, this.y);  //! Distância entre a coord. y entre os dois
+        const pacIsAbove = pacman.y < this.y;      //! Define se o Pac-Man está acima da IA
+        const pacIsBelow = pacman.y > this.y;      //! Define se o Pac-Man está abaixo da IA
+        const pacIsToTheRight = pacman.x > this.x; //! Define se o Pac-Man está à direita da IA
+        const pacIsToTheLeft  = pacman.x < this.x; //! Define se o Pac-Man está à esquerda da IA
         
         var bestDirection;        //! A direção para ir que trará a IA mais próxima (ou mais longínqua) do Pac-Man
         var secondBestDirection;  //! A segunda melhor direção. Usada quando não for possível ir para a acima

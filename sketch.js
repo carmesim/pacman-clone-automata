@@ -97,7 +97,7 @@ function draw(){
     //     count = 0
     // }
 
-    ai1.AI_update();
+    ai1.AI_update(player);
 
     // this part will change with more ghosts
     // sorry, guys!
