@@ -16,6 +16,9 @@ let player_btn;
 let ghost_btn;
 let power_up_timer = 0;
 
+const States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
+const Directions = {"Up":0, "Down": 1, "Left": 2, "Right": 3}
+
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
   img = loadImage('https://i.imgur.com/P6eL57x.png');
@@ -62,9 +65,9 @@ function draw(){
     // prints the surroundings of the player
     console.clear();
     print('linha', row-1,'coluna: ', col-1);
-    print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
-    print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
-    print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
+    print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col]);
+    print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col]);
+    print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col]);
 
     player.draw();
     player.move(dir);
@@ -85,16 +88,17 @@ function draw(){
     //ai1.x = ideal_tracking.x;
     //ai1.y = ideal_tracking.y;
 
-    if(count % 20 == 0){
-        dir_ai1 = floor(10*random())%4;
-        if(dir_ai1 == 2){
-            dir_ai1 = 3;
-        }else{
-            dir_ai1 = 2;
-        }
-        count = 0
-    }
+    // if(count % 20 == 0){
+    //     dir_ai1 = floor(10*random())%4;
+    //     if(dir_ai1 == 2){
+    //         dir_ai1 = 3;
+    //     }else{
+    //         dir_ai1 = 2;
+    //     }
+    //     count = 0
+    // }
 
+    ai1.AI_update();
 
     // this part will change with more ghosts
     // sorry, guys!
