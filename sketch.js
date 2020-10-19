@@ -67,6 +67,9 @@ function draw(){
     player.draw();
     player.move(dir);
 
+    let row = floor(player.y / sclY);
+    let col = floor(player.x / sclX);
+
     if (mapa[row+4][col - 1] == 2){
       pac.state = 4; // Powered-up !
       power_up_timer = 20;
@@ -94,12 +97,8 @@ function draw(){
         player.y = 24.5*sclY;
         dir = 4;
 
-
-        //fazendo o fantasma ficar parado
         ai1.draw();  
         ai1.AI_update(player);
-      
-
 
         //resetando o game
         if (space_pressed == true){
