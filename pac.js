@@ -45,12 +45,12 @@ class pac
                 //! Should be unreachable
                 return dir;
         }
-    }
+    };
 
     backtrack()
     {
         this.move(this.rev_dir);
-    }
+    };
 
     //! Updates the behavior of a Ghost
     AI_update()
@@ -146,10 +146,10 @@ class pac
             if (!moved) {
                 //! Ainda assim, não foi possível mover para a segunda direção :/ 
                 //! Portanto movemos para onde a IA veio
-                ai.backtrack();
+                this.backtrack();
             }
         }
-    }
+    };
 
     move(dir_v)
     {
@@ -190,7 +190,7 @@ class pac
        }
        this.x = constrain(this.x,2.5*sclX , 27.5*sclX );
        this.y = constrain(this.y,2.5*sclY , 29.5*sclY);
-       this.rev_dir = reverse_dir(dir_v);
+       this.rev_dir = this.reverse_dir(dir_v);
     };
     colisions(){
         let row = floor(this.y / sclY);
