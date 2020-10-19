@@ -1,6 +1,6 @@
 let player;
 let dir = 4;
-let r = 10;
+let r = 12;
 let sclX;
 let sclY;
 let count = 0;
@@ -254,8 +254,15 @@ function setGhostAut(){
 
 
 function pacMan_Ghost_Colision () { //retorna 1 se o pacman bateu no fantasma
-  if (dist(player.x, player.y, ai1.x, ai1.y) <= 10.2){
-    return 1;
-  }
+    print('dist: ',dist(player.x, player.y, ai1.x, ai1.y));
+    print('dist _ eu ', Math.sqrt(Math.pow((player.x - ai1.x), 2) + Math.pow((player.y - ai1.y), 2)));
+
+    print('P_x: ', player.x, 'P_y: ', player.y, '\nG_x: ', ai1.x, 'G_y: ', ai1.y);
+
+
+
+    if (dist(player.x, player.y, ai1.x, ai1.y) <= 12.4){
+        return 1;
+    }
 
 }
