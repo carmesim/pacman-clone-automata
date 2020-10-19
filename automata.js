@@ -87,6 +87,10 @@ class automata{
     draw(){
         if (this.isGhost == true){
 
+            if (mouseIsPressed){
+                print('Mouse X: ', mouseX, 'Y: ', mouseY);    
+            }
+
             fill("yellow");
             strokeWeight(this.thicknessA);
             stroke (this.colorA);
@@ -113,6 +117,24 @@ class automata{
             strokeWeight(2);
             noFill()
             arc(map_width + 110, 135, 80, 100, HALF_PI, PI );
+
+            
+            //arrow tip M -> C
+            line(453,120, 460, 114);
+            line(453,120, 460, 126);
+
+            //arrow tip S -> C
+            line(430, 138, 422, 145 );
+            line(430, 138, 438, 145 );
+
+            //arrow tip C -> S
+            line(478,175, 468, 175);
+            line(480,174, 481, 164);
+
+            //arrow tip S -> M
+            line(512, 128,504,129)
+            line(512, 128,513,137)
+
 
             line(map_width + 87,120, map_width +  155,120);
             line(map_width + 87,120, map_width +  125,185);
@@ -153,12 +175,13 @@ class automata{
             stroke (0);
             fill(0);
 
-            if (mouseIsPressed){
-            print('Mouse X: ', mouseX, 'Y: ', mouseY);    
-            }
+            
             
 
         }else{
+//519    110
+            
+
             fill("yellow");
             strokeWeight(this.thicknessA);
             stroke (this.colorA);
@@ -187,8 +210,26 @@ class automata{
             arc(map_width + 110, 135, 80, 100, HALF_PI, PI );
             arc(map_width + 122, 150, 100, 120, PI + QUARTER_PI, TWO_PI - QUARTER_PI );
 
+            //edges 
             line(map_width + 87,120, map_width +  155,120);
             line(map_width + 87,120, map_width +  125,185);
+
+            //arrow tip N -> M
+            line(519,110, 518, 100);
+            line(519,110, 509, 110);
+
+            //arrow tip M -> N
+            line(453,120, 460, 114);
+            line(453,120, 460, 126);
+
+            //arrow tip N -> P
+            line(478,175, 468, 175);
+            line(480,174, 481, 164);
+
+            //arrow tip P -> N
+            line(430, 138, 422, 145 );
+            line(430, 138, 438, 145 );
+
             //line(map_width +  125,185, map_width +  155,120);  
             strokeWeight(this.thicknessC);
             stroke (this.colorC);

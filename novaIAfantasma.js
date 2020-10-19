@@ -1,5 +1,5 @@
 
-const States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4, "Dead": 5}
+const States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
 const Directions = {"Up":1, "Right": 2, "Left": 3, "Down": 4}
 
 function AI_update()
