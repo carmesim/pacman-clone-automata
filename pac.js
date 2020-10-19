@@ -51,7 +51,6 @@ class pac
     {
         if(this.backtracktimer > 0)
         {
-            console.log("backtracker timer > 0");
             this.backtracktimer--;
             this.move(this.rev_dir);
             return;
@@ -137,13 +136,11 @@ class pac
 
         //! Se perseguindo, a IA deve ir em direção à coordenada mais próxima do Pac-Man.
         //! Se fugindo, a IA deve ir em direção contrária à coordenada mais próxima do Pac-Man.
-        console.log("indo para direção", bestDirection);
         this.move(bestDirection);
         var moved = this.x !== cur_pos_x || this.y !== cur_pos_y;
 
         if(!moved)
         {
-            console.log("não deu certo. indo agora para: ", secondBestDirection);
             /*! Não foi possível mover para a direção dada acima, portanto tentamos mover para a outra melhor direção !*/
             cur_pos_x = this.x;
             cur_pos_y = this.y;
