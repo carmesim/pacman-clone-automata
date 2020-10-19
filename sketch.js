@@ -127,8 +127,8 @@ function draw(){
         //print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
         //print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
 
-        player.draw();
         player.move(dir);
+        player.draw();
 
         if (mapa[row+4][col - 1] == 2){
           player.state = 4; // Powered-up !
@@ -138,8 +138,8 @@ function draw(){
         aut.update();
         aut.draw();
         
-        ai1.draw();
         ai1.AIUpdate(player);
+        ai1.draw();
 
 
         //vamos calcular a real posicao x e y do fantasmas
