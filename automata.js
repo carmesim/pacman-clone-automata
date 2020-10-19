@@ -151,6 +151,7 @@ class automata{
             fill("yellow");
             textSize(10)
             strokeWeight(1);
+            stroke(0);
             text('r - Renasce', map_width  + 20, 250);
             text('pp - Pac-man pega power up', map_width  + 20, 265);
             text('pa - Power up acabou', map_width  + 20, 283);
@@ -243,6 +244,7 @@ class automata{
             fill("yellow");
             textSize(10)
             strokeWeight(1);
+            stroke(0);
             text('tf - Tocado pelo fantasma', map_width  + 20, 250);
             text('r - Renasce', map_width  + 20, 270);
             text('pp - Pac-man pega power up', map_width  + 20, 285);
