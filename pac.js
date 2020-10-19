@@ -56,7 +56,7 @@ class pac
     AI_update()
     {
         //! Primeiros devemos ver qual o estado do Pac-Man
-        if(pac.state == States.Normal)
+        if(player.state == States.Normal)
         {
             //! Pac-Man normal, então a IA deve segui-lo
             this.state == States.Chase;
@@ -70,12 +70,12 @@ class pac
             Devemos encontrar em qual quadrante o Pac-Man está, de modo a seguir (ou fugir) de acordo.
         !*/
     
-        const diff_x     = abs(pac.x, this.x);  //! Distância entre a coord. x entre os dois
-        const diff_y     = abs(pac.y, this.y);  //! Distância entre a coord. y entre os dois
-        const pacIsAbove = pac.x < this.x;      //! Define se o Pac-Man está acima da IA
-        const pacIsBelow = pac.x > this.x;      //! Define se o Pac-Man está abaixo da IA
-        const pacIsToTheRight = pac.y > this.y; //! Define se o Pac-Man está à direita da IA
-        const pacIsToTheLeft  = pac.y < this.y; //! Define se o Pac-Man está à esquerda da IA
+        const diff_x     = Math.abs(player.x, this.x);  //! Distância entre a coord. x entre os dois
+        const diff_y     = Math.abs(player.y, this.y);  //! Distância entre a coord. y entre os dois
+        const pacIsAbove = player.x < this.x;      //! Define se o Pac-Man está acima da IA
+        const pacIsBelow = player.x > this.x;      //! Define se o Pac-Man está abaixo da IA
+        const pacIsToTheRight = player.y > this.y; //! Define se o Pac-Man está à direita da IA
+        const pacIsToTheLeft  = player.y < this.y; //! Define se o Pac-Man está à esquerda da IA
         
         var bestDirection;        //! A direção para ir que trará a IA mais próxima (ou mais longínqua) do Pac-Man
         var secondBestDirection;  //! A segunda melhor direção. Usada quando não for possível ir para a acima

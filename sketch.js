@@ -63,11 +63,11 @@ function draw(){
     let col = floor(player.x / sclX);
 
     // prints the surroundings of the player
-    console.clear();
-    print('linha', row-1,'coluna: ', col-1);
-    print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col]);
-    print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col]);
-    print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col]);
+    // console.clear();
+    // print('linha', row-1,'coluna: ', col-1);
+    // print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col]);
+    // print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col]);
+    // print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col]);
 
     player.draw();
     player.move(dir);
@@ -81,7 +81,6 @@ function draw(){
     aut.draw();
     
     ai1.draw();
-    ai1.move(dir_ai1)
     
     //track(player.x, player.y);  // Updates ideal_tracking
 
@@ -109,8 +108,7 @@ function draw(){
       player.state = 1;
       ai1.color = "red";
     }
-  
-    count += 1;
+
 }
 
 // I believe that the obstacle checking will have to be inside this function
