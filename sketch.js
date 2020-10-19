@@ -18,7 +18,7 @@ let power_up_timer = 0;
 let space_pressed = false;
 let finished = false;
 let won = 0; 
-let num_ghosts_left = 1;
+let ghosts_eaten = 0;
 
 const _States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
 const _Directions = {"Up":0, "Down": 1, "Left": 2, "Right": 3}
@@ -98,7 +98,7 @@ function draw(){
         print ('ESPACO : ', space_pressed);
         if (space_pressed == true){
             finished = false;
-            num_ghosts_left++;
+            ghosts_eaten = 0;
         }
 
         // USAR ESSA ESTRUTURA PARA SABER A POSIÇÃO DO MOUSE AJUDA PARA CALIBRAR ESTITICA
@@ -141,6 +141,10 @@ function draw(){
         ai1.AIUpdate(player);
         ai1.draw();
 
+        textSize(14);
+        fill("yellow");
+        stroke("yellow");
+        text(ghosts_eaten,map_width/2 - 5, map_height/2 - 5);
 
         //vamos calcular a real posicao x e y do fantasmas
         let ghost_col = floor(ai1.x / sclX);
@@ -164,15 +168,27 @@ function draw(){
         if (pacMan_Ghost_Colision() == 1){ // houve colisão
 
             if(player.state == 4){ //caso tenha tido colisao mas o pac estava com power up
-                num_ghosts_left--;
+                ghosts_eaten++;
                 space_pressed = false;
 
-                if(num_ghosts_left == 0){ //nao tem mais fantasmas ganhamos o jogo
+                if(ghosts_eaten == 3){ //nao tem mais fantasmas ganhamos o jogo
                     finished = true;
                     won = true;
                     ai1.state = 5;
                     aut.update();
                     aut.draw();
+                }else{
+                    ai1.state = 5;
+                    aut.update();
+                    aut.draw();
+                    //reposicionar o pac man
+                    player.x = 15.5*sclX; //estou reposicionando o pacman para a posicao inicial
+                    player.y = 24.5*sclY;
+                    dir = 4;
+                    dir_ai1 = 2;
+
+                    ai1.x = 15.5*sclX;
+                    ai1.y = 12.5*sclY;
                 }
 
             }else{
