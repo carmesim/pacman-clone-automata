@@ -61,8 +61,7 @@ function setup() {
 }
 
 function draw(){
-    background(img);
-    gridLines();
+    
     if(num_ghosts_left == 0){
       finished = true;
       space_pressed = false;
@@ -119,6 +118,8 @@ function draw(){
     }
 
     else {
+        background(img);
+        gridLines();
 
         let row = floor(player.y / sclY);
         let col = floor(player.x / sclX);
@@ -167,10 +168,12 @@ function draw(){
         if (pacMan_Ghost_Colision() == 1){ // houve colisão
 
             if(player.state == 4){
+              ai1.state = 5; // this will change for more ghosts
               num_ghosts_left--;
             }else{
               finished = true;
               space_pressed = false;
+              player.state = 5;
               won = false;
             }
 

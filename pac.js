@@ -1,6 +1,6 @@
 class pac 
 {
-    //const _States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
+    //const _States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4, "Dead": 5}
     constructor(color, initX, initY)
     {
         this.x = initX;
