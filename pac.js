@@ -223,11 +223,5 @@ class pac
            this.rev_dir = this.reverse_dir(dir_v);
        }
     };
-    colisions(){
-        let row = floor(this.y / sclY);
-        let col = floor(this.x / sclX);
-        console.clear();
-        print('linha', row-1,'coluna: ', col-1);
     
-    };
 }
