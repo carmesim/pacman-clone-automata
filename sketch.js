@@ -16,8 +16,8 @@ let player_btn;
 let ghost_btn;
 let power_up_timer = 0;
 
-const States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
-const Directions = {"Up":0, "Down": 1, "Left": 2, "Right": 3}
+const _States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
+const _Directions = {"Up":0, "Down": 1, "Left": 2, "Right": 3}
 
 function preload() {
   //https://i.imgur.com/X6ZZWHF.png
