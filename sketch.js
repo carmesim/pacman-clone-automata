@@ -37,6 +37,7 @@ function setup() {
     aut = new automata(player, false); // initially it's not a ghost
     
     ai1 = new pac('red',15.5*sclX,12.5*sclY); //criando o primeiro fantasma vermelho
+    
     dir_ai1 = 2;
     //ideal_tracking = createVector(map_height/2, map_width/2);
     player_btn = createButton('Pac');
@@ -64,20 +65,7 @@ function draw(){
     //vou fazer um grande if aqui para travar o codigo para garantir que ele encerre
 
     // prints the surroundings of the player
-    player.draw();
-    player.move(dir);
-
-    let row = floor(player.y / sclY);
-    let col = floor(player.x / sclX);
-
-    if (mapa[row+4][col - 1] == 2){
-      pac.state = 4; // Powered-up !
-      power_up_timer = 20;
-    }
-
-    aut.update();
-    aut.draw();
-    
+  
     //print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
     //print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
     //print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
@@ -91,14 +79,14 @@ function draw(){
         textSize(20);
         text('Pressione Espaço para reiniciar!', 36, 239);
 
-
         //reposicionar o pac man
         player.x = 15.5*sclX; //estou reposicionando o pacman para a posicao inicial
         player.y = 24.5*sclY;
         dir = 4;
 
-        ai1.draw();  
-        ai1.AI_update(player);
+        //fazendo o fantasma ficar parado
+        dir_ai1 = 2;
+
 
         //resetando o game
         if (space_pressed == true){
@@ -140,6 +128,8 @@ function draw(){
         aut.update();
         aut.draw();
         
+        ai1.draw();
+        ai1.AIUpdate(player);
 
 
         //vamos calcular a real posicao x e y do fantasmas
@@ -148,23 +138,6 @@ function draw(){
 
         print ('FANTASMA row: ', ghost_row - 1, 'col: ', ghost_col - 1);
         
-        //track(player.x, player.y);  // Updates ideal_tracking
-
-        //ai1.x = ideal_tracking.x;
-        //ai1.y = ideal_tracking.y;
-
-        //isso eh o movimento aleatorio do fantasma
-        if(count % 20 == 0){
-            dir_ai1 = floor(10*random())%4;
-            if(dir_ai1 == 2){
-                dir_ai1 = 3;
-            }else{
-                dir_ai1 = 2;
-            }
-            count = 0
-        }
-
-
         // this part will change with more ghosts
         // sorry, guys!
         if(power_up_timer > 0){
@@ -183,7 +156,15 @@ function draw(){
             finished = true;
             space_pressed = false;
         }
+
     }
+
+  
+
+
+
+    count += 1;
+
 }
 
 // I believe that the obstacle checking will have to be inside this function

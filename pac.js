@@ -11,23 +11,6 @@ class pac
         this.backtracktimer = 0;        //! Define por quanto tempo iremos para a direção do backtrack
     }
 
-    // This method is deactivated for now
-
-    // move_if_possible(ndir)
-    // {
-    //     let col_up    = img.get(this.x,this.y-25)[0] 
-    //     let col_down  = img.get(this.x,this.y+25)[0] 
-    //     let col_left  = img.get(this.x - 25,this.y)[0]
-    //     let col_right = img.get(this.x + 25,this.y)[0]
-    //     // Note that if the thickness of the wall is less than the radius of the pacman
-    //     // some bugs can ocurr
-    //     if(!((0 == col_up && ndir == 0) || (col_down == 0 && ndir ==1)|| (col_left == 0 && ndir == 2) ||(col_right == 0 && ndir == 3)))
-    //     {
-    //         this.move(ndir);
-    //     }
-    //     this.move(ndir);
-    // };
-
     draw()
     {
         fill(this.color);
@@ -64,7 +47,7 @@ class pac
     };
 
     //! Updates the behavior of a Ghost
-    AI_update(pacman)
+    AIUpdate(pacman)
     {
         if(this.backtracktimer > 0)
         {
