@@ -9,10 +9,4 @@ class grid{
 	obstacles(){
 		//think about it later
 	}
-
-
-
-
-
-
 }
