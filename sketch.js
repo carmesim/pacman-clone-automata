@@ -18,6 +18,9 @@ let power_up_timer = 0;
 let space_pressed = false;
 let finished = false;
 
+const _States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
+const _Directions = {"Up":0, "Down": 1, "Left": 2, "Right": 3}
+
 function preload() {
   img = loadImage('https://i.imgur.com/P6eL57x.png');
   mapa = loadJSON('Official_map.json')  
@@ -61,7 +64,20 @@ function draw(){
     //vou fazer um grande if aqui para travar o codigo para garantir que ele encerre
 
     // prints the surroundings of the player
-  
+    player.draw();
+    player.move(dir);
+
+    let row = floor(player.y / sclY);
+    let col = floor(player.x / sclX);
+
+    if (mapa[row+4][col - 1] == 2){
+      pac.state = 4; // Powered-up !
+      power_up_timer = 20;
+    }
+
+    aut.update();
+    aut.draw();
+    
     //print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
     //print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
     //print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
@@ -75,14 +91,14 @@ function draw(){
         textSize(20);
         text('Pressione Espaço para reiniciar!', 36, 239);
 
+
         //reposicionar o pac man
         player.x = 15.5*sclX; //estou reposicionando o pacman para a posicao inicial
         player.y = 24.5*sclY;
         dir = 4;
 
-        //fazendo o fantasma ficar parado
-        dir_ai1 = 2;
-
+        ai1.draw();  
+        ai1.AI_update(player);
 
         //resetando o game
         if (space_pressed == true){
@@ -124,8 +140,6 @@ function draw(){
         aut.update();
         aut.draw();
         
-        ai1.draw();
-        ai1.move(dir_ai1)
 
 
         //vamos calcular a real posicao x e y do fantasmas
@@ -169,15 +183,7 @@ function draw(){
             finished = true;
             space_pressed = false;
         }
-
     }
-
-  
-
-
-
-    count += 1;
-
 }
 
 // I believe that the obstacle checking will have to be inside this function
