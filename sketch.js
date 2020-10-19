@@ -17,7 +17,7 @@ let ghost_btn;
 let power_up_timer = 0;
 let space_pressed = false;
 let finished = false;
-let won = 1; 
+let won = 0; 
 let num_ghosts_left = 1;
 
 const _States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
@@ -63,11 +63,6 @@ function setup() {
 function draw(){
     background(img);
     gridLines();
-    if(num_ghosts_left == 0){
-      finished = true;
-      space_pressed = false;
-      won = true;
-    }
 
     //vou fazer um grande if aqui para travar o codigo para garantir que ele encerre
 
@@ -102,8 +97,10 @@ function draw(){
 
 
         //resetando o game
+        print ('ESPACO : ', space_pressed);
         if (space_pressed == true){
             finished = false;
+            num_ghosts_left++;
         }
 
         // USAR ESSA ESTRUTURA PARA SABER A POSIÇÃO DO MOUSE AJUDA PARA CALIBRAR ESTITICA
@@ -166,12 +163,19 @@ function draw(){
 
         if (pacMan_Ghost_Colision() == 1){ // houve colisão
 
-            if(player.state == 4){
-              num_ghosts_left--;
+            if(player.state == 4){ //caso tenha tido colisao mas o pac estava com power up
+                num_ghosts_left--;
+                space_pressed = false;
+
+                if(num_ghosts_left == 0){ //nao tem mais fantasmas ganhamos o jogo
+                    finished = true;
+                    won = true;
+                }
+
             }else{
-              finished = true;
-              space_pressed = false;
-              won = false;
+                finished = true;
+                space_pressed = false;
+                won = false;
             }
 
         }
