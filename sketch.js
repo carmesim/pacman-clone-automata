@@ -249,6 +249,9 @@ function setPlayerAut(){
   aut.isGhost = false;
   ghost_btn.style('border', "red");
   player_btn.style('border', "2px solid #4CAF50");
+  background(img)
+  aut.update();
+  aut.draw();
 }
 // Sets the Ai1's automata to be vizualized
 function setGhostAut(){
@@ -256,6 +259,9 @@ function setGhostAut(){
   aut.isGhost = true;
   player_btn.style('border', "yellow");
   ghost_btn.style('border', "2px solid #4CAF50");
+  background(img)
+  aut.update();
+  aut.draw();
 }
 
 
