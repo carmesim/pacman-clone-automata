@@ -92,7 +92,7 @@ function draw() {
     ai1.y = 12.5 * sclY;
 
     // resetando o game
-    print('ESPACO : ', space_pressed);
+    //print('ESPACO : ', space_pressed);
     if (space_pressed == true) {
       finished = false;
       num_ghosts_left++;
@@ -114,16 +114,8 @@ function draw() {
     background(img);
     gridLines();
 
-    let row = floor(player.y / sclY);
-    let col = floor(player.x / sclX);
-
-    // prints the surroundings of the player
-    console.clear();
-    print('PAC-MAN linha', row - 1, 'coluna: ',
-          col - 1); // esse print mostra a posição do pacman
-    // print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
-    // print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
-    // print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
+    const row = floor(player.y / sclY);
+    const col = floor(player.x / sclX);
 
     player.move(dir);
     player.draw();
@@ -132,16 +124,12 @@ function draw() {
       player.state = 4; // Powered-up !
       power_up_timer = 30;
     }
-    print(aut.isGhost);
+    //print(aut.isGhost);
     aut.update();
     aut.draw();
 
     ai1.AIUpdate(player);
     ai1.draw();
-
-    // vamos calcular a real posicao x e y do fantasmas
-    let ghost_col = floor(ai1.x / sclX);
-    let ghost_row = floor(ai1.y / sclY);
 
     if (power_up_timer > 0) {
       power_up_timer--;
@@ -156,7 +144,8 @@ function draw() {
       if (player.state == 4) { // caso tenha tido colisao mas o pac estava com power up
         num_ghosts_left--;
         space_pressed = false;
-        if (num_ghosts_left == 0) { // nao tem mais fantasmas ganhamos o jogo
+        if (num_ghosts_left == 0) 
+        {
           finished = true;
           won = true;
           ai1.state = 5;
@@ -233,8 +222,9 @@ function setGhostAut() {
 }
 
 function pacManGhostColision() {
-  print('P_x: ', player.x, 'P_y: ', player.y, '\nG_x: ', ai1.x, 'G_y: ', ai1.y);
+  //print('P_x: ', player.x, 'P_y: ', player.y, '\nG_x: ', ai1.x, 'G_y: ', ai1.y);
   if (dist(player.x, player.y, ai1.x, ai1.y) <= 12.4) {
+    console.log("collided!");
     return 1;
   }
   return 0;
