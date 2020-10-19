@@ -17,7 +17,6 @@ let ghost_btn;
 let power_up_timer = 0;
 
 function preload() {
-  //https://i.imgur.com/X6ZZWHF.png
   img = loadImage('https://i.imgur.com/P6eL57x.png');
   mapa = loadJSON('Official_map.json')  
 }
@@ -29,7 +28,8 @@ function setup() {
     frameRate(10);
 
     player = new pac('yellow',15.5*sclX,24.5*sclY);
-    aut = new automata(player);
+
+    aut = new automata(player, false); // initially it's not a ghost
     
     ai1 = new pac('red',15.5*sclX,12.5*sclY);
     dir_ai1 = 2;
@@ -54,7 +54,7 @@ function setup() {
 
 function draw(){
     background(img);
-    gridLines();
+    //gridLines();
 
     let row = floor(player.y / sclY);
     let col = floor(player.x / sclX);
@@ -70,10 +70,10 @@ function draw(){
     player.move(dir);
 
     if (mapa[row+4][col - 1] == 2){
-      pac.state = 4; // Powered-up !
+      player.state = 4; // Powered-up !
       power_up_timer = 20;
     }
-
+    print(aut.isGhost)
     aut.update();
     aut.draw();
     
@@ -162,12 +162,14 @@ function gridLines(){
 // Sets the player's automata to be vizualized
 function setPlayerAut(){
   aut.pac = player;
+  aut.isGhost = false;
   ghost_btn.style('border', "red");
   player_btn.style('border', "2px solid #4CAF50");
 }
 // Sets the Ai1's automata to be vizualized
 function setGhostAut(){
   aut.pac = ai1;
+  aut.isGhost = true;
   player_btn.style('border', "yellow");
   ghost_btn.style('border', "2px solid #4CAF50");
 }
