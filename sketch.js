@@ -143,27 +143,19 @@ function draw() {
     let ghost_col = floor(ai1.x / sclX);
     let ghost_row = floor(ai1.y / sclY);
 
-    print('FANTASMA row: ', ghost_row - 1, 'col: ', ghost_col - 1);
-
-    // this part will change with more ghosts
-    // sorry, guys!
     if (power_up_timer > 0) {
       power_up_timer--;
       power_up_timer % 2 == 0 ? ai1.color = "blue" : ai1.color = "white";
     } else if (power_up_timer == 0) {
-      player.state = 1;
+      player.state = States.Normal;
       ai1.color = "red";
     }
 
-    count += 1;
-
-    if (pacMan_Ghost_Colision() == 1) { // houve colisão
-
-      if (player.state ==
-          4) { // caso tenha tido colisao mas o pac estava com power up
+    if (pacManGhostColision() == 1) 
+    { // houve colisão
+      if (player.state == 4) { // caso tenha tido colisao mas o pac estava com power up
         num_ghosts_left--;
         space_pressed = false;
-
         if (num_ghosts_left == 0) { // nao tem mais fantasmas ganhamos o jogo
           finished = true;
           won = true;
@@ -171,7 +163,6 @@ function draw() {
           aut.update();
           aut.draw();
         }
-
       } else {
         finished = true;
         space_pressed = false;
@@ -184,11 +175,7 @@ function draw() {
   }
 }
 
-// I believe that the obstacle checking will have to be inside this function
-// cause the obstacle can be seen as a "you can't go to that direction" signal
-
 function keyPressed() {
-
   let row = floor(player.y / sclY);
   let col = floor(player.x / sclX);
   if (keyCode === UP_ARROW) {
@@ -213,19 +200,6 @@ function keyPressed() {
   return false; // prevent default
 }
 
-//! track(int objX, int objY, int curX, int curY)
-//! Returns the direction to go to in order to
-//! get closer to (objX, objY), the objective point.
-function track(objX, objY) {
-  //! Finding the ideal point to go to
-  var target = createVector(objX, objY);
-  var distance = target.dist(ideal_tracking);
-  var mapped_distance = map(distance, 100, 0, 1.5, 0.5);
-  target.sub(ideal_tracking);
-  target.normalize();
-  target.mult(0.5 * mapped_distance);
-  ideal_tracking.add(target);
-}
 function gridLines() {
   stroke(50);
   for (let i = 0; i <= map_width + sclX; i += sclX) {
@@ -236,7 +210,7 @@ function gridLines() {
   }
 }
 
-// Sets the player's automata to be vizualized
+//! Sets the player's automata to be visualized
 function setPlayerAut() {
   aut.pac = player;
   aut.isGhost = false;
@@ -246,7 +220,8 @@ function setPlayerAut() {
   aut.update();
   aut.draw();
 }
-// Sets the Ai1's automata to be vizualized
+
+//! Sets the Ai1's automata to be visualized
 function setGhostAut() {
   aut.pac = ai1;
   aut.isGhost = true;
@@ -257,14 +232,10 @@ function setGhostAut() {
   aut.draw();
 }
 
-function pacMan_Ghost_Colision() { // retorna 1 se o pacman bateu no fantasma
-  print('dist: ', dist(player.x, player.y, ai1.x, ai1.y));
-  print('dist _ eu ', Math.sqrt(Math.pow((player.x - ai1.x), 2) +
-                                Math.pow((player.y - ai1.y), 2)));
-
+function pacManGhostColision() {
   print('P_x: ', player.x, 'P_y: ', player.y, '\nG_x: ', ai1.x, 'G_y: ', ai1.y);
-
   if (dist(player.x, player.y, ai1.x, ai1.y) <= 12.4) {
     return 1;
   }
+  return 0;
 }
