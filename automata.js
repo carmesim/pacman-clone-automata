@@ -47,39 +47,55 @@ class automata{
     //draws the automata
     draw(){
         if (this.isGhost == true){
+
             fill("yellow");
             strokeWeight(this.thicknessA);
             stroke (this.colorA);
             circle(map_width +  70,120,30);
+
             fill(0);
             textSize(18);
             stroke (0);
             strokeWeight(1);
-            text('A', map_width  + 62, 125);
+            text('C', map_width  + 62, 125);
+
             stroke (100);
             fill("yellow");
             strokeWeight(this.thicknessB);
             stroke (this.colorB);
             circle(map_width +  170,120,30);
+
             fill(0);
             stroke (0);
             strokeWeight(1);
-            text('B', map_width  + 165, 125);
+            text('M', map_width  + 163, 125);
+
             stroke (100);
             strokeWeight(2);
             noFill()
-            arc(map_width + 110, 135, 80, 80, HALF_PI, PI );
-            line(map_width + 105,120, map_width +  155,120);
-            line(map_width + 105,120, map_width +  130,165);
-            line(map_width +  130,165, map_width +  155,120);  
+            arc(map_width + 110, 135, 80, 100, HALF_PI, PI );
+
+            line(map_width + 87,120, map_width +  155,120);
+            line(map_width + 87,120, map_width +  125,185);
+            line(map_width +  125,185, map_width +  155,120);  
             strokeWeight(this.thicknessC);
             stroke (this.colorC);
             fill("yellow")
-            circle(map_width +  130,170,30);
+            circle(map_width +  125,190,30);
             stroke (0);
             strokeWeight(1);
             fill(0);
-            text('C', map_width  + 122, 175);
+            text('S', map_width  + 117, 195);
+            stroke("yellow");
+            fill("yellow");
+            textSize(12)
+            strokeWeight(1);
+            text('r - Renasce', map_width  + 20, 250);
+            text('pp - Pac-man pega power up', map_width  + 20, 270);
+            text('pa - power up acabou', map_width  + 20, 290);
+            stroke (0);
+            fill(0);
+
         }else{
             fill("yellow");
             strokeWeight(this.thicknessA);
@@ -107,6 +123,8 @@ class automata{
             strokeWeight(this.thicknessC);
             stroke (this.colorC);
             stroke (0);
+            strokeWeight(1);
+            fill(0);
             
 
         }

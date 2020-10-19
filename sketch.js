@@ -62,6 +62,7 @@ function draw(){
     // prints the surroundings of the player
     console.clear();
     print('PAC-MAN linha', row-1,'coluna: ', col-1); //esse print mostra a posição do pacman
+
     //print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
     //print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
     //print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
@@ -113,6 +114,11 @@ function draw(){
       ai1.color = "red";
     }
   
+
+    if (mouseIsPressed){
+      print('Mouse X: ', mouseX, 'Y: ', mouseY);    
+    }
+
     count += 1;
 }
 
