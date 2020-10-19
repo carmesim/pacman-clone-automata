@@ -73,11 +73,5 @@ class pac
        this.x = constrain(this.x,2.5*sclX , 27.5*sclX );
        this.y = constrain(this.y,2.5*sclY , 29.5*sclY);
     };
-    colisions(){
-        let row = floor(this.y / sclY);
-        let col = floor(this.x / sclX);
-        console.clear();
-        print('linha', row-1,'coluna: ', col-1);
     
-    };
 }

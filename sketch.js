@@ -23,7 +23,7 @@ function preload() {
 }
 function setup() {
     createCanvas(601,397);
-    sclX = map_width/28 - 1;
+    sclX = map_width/28 - 1; //calibrando o tamanho do mapa para bater com a matriz
     sclY = 1.025*map_height/36 + 1;
     background(img);
     frameRate(10);
@@ -31,7 +31,7 @@ function setup() {
     player = new pac('yellow',15.5*sclX,24.5*sclY);
     aut = new automata(player);
     
-    ai1 = new pac('red',15.5*sclX,12.5*sclY);
+    ai1 = new pac('red',15.5*sclX,12.5*sclY); //criando o primeiro fantasma vermelho
     dir_ai1 = 2;
     //ideal_tracking = createVector(map_height/2, map_width/2);
     player_btn = createButton('Pac');
@@ -61,10 +61,10 @@ function draw(){
 
     // prints the surroundings of the player
     console.clear();
-    print('linha', row-1,'coluna: ', col-1);
-    print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
-    print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
-    print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
+    print('PAC-MAN linha', row-1,'coluna: ', col-1); //esse print mostra a posição do pacman
+    //print(mapa[row+3][col-2],mapa[row+3][col - 1], mapa[row+3][col] );
+    //print(mapa[row+4][col-2],mapa[row+4][col - 1], mapa[row+4][col] );
+    //print(mapa[row+5][col-2],mapa[row+5][col - 1], mapa[row+5][col] );
 
     player.draw();
     player.move(dir);
@@ -79,6 +79,13 @@ function draw(){
     
     ai1.draw();
     ai1.move(dir_ai1)
+
+
+    //vamos calcular a real posicao x e y do fantasmas
+    let ghost_col = floor(ai1.x / sclX);
+    let ghost_row = floor(ai1.y / sclY);
+
+    print ('FANTASMA row: ', ghost_row - 1, 'col: ', ghost_col - 1);
     
     //track(player.x, player.y);  // Updates ideal_tracking
 
