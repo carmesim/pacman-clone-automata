@@ -37,7 +37,7 @@ function setup() {
     aut = new automata(player, false); // initially it's not a ghost
     
     ai1 = new pac('red',15.5*sclX,12.5*sclY); //criando o primeiro fantasma vermelho
-    
+
     dir_ai1 = 2;
     //ideal_tracking = createVector(map_height/2, map_width/2);
     player_btn = createButton('Pac');
@@ -86,6 +86,9 @@ function draw(){
 
         //fazendo o fantasma ficar parado
         dir_ai1 = 2;
+
+        ai1.x = 15.5*sclX;
+        ai1.y = 12.5*sclY;
 
 
         //resetando o game
