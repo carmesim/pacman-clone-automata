@@ -55,6 +55,7 @@ class pac
     //! Updates the behavior of a Ghost
     AI_update()
     {
+
         //! Primeiros devemos ver qual o estado do Pac-Man
         if(player.state == States.Normal)
         {
@@ -133,19 +134,22 @@ class pac
 
         //! Se perseguindo, a IA deve ir em direção à coordenada mais próxima do Pac-Man.
         //! Se fugindo, a IA deve ir em direção contrária à coordenada mais próxima do Pac-Man.
+        console.log("indo para direção", bestDirection);
         this.move(bestDirection);
-        var moved = this.x == cur_pos_x && this.y == cur_pos_y;
+        var moved = this.x !== cur_pos_x || this.y !== cur_pos_y;
 
         if(!moved)
         {
+            console.log("não deu certo. indo agora para: ", secondBestDirection);
             /*! Não foi possível mover para a direção dada acima, portanto tentamos mover para a outra melhor direção !*/
             cur_pos_x = this.x;
             cur_pos_y = this.y;
             moved = this.move(secondBestDirection);
-            moved = this.x == cur_pos_x && this.y == cur_pos_y;
+            moved = this.x !== cur_pos_x || this.y !== cur_pos_y;
             if (!moved) {
                 //! Ainda assim, não foi possível mover para a segunda direção :/ 
                 //! Portanto movemos para onde a IA veio
+                console.log("backtracking")
                 this.backtrack();
             }
         }
