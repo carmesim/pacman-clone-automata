@@ -167,14 +167,12 @@ function draw() {
                   ai1.state = 5;
                   aut.update();
                   aut.draw();
-                  //reposicionar o pac man
-                  player.x = 15.5*sclX; //estou reposicionando o pacman para a posicao inicial
-                  player.y = 24.5*sclY;
-                  dir = 4;
+                  // reposiciona a IA
                   dir_ai1 = 2;
-
                   ai1.x = 15.5*sclX;
                   ai1.y = 12.5*sclY;
+                  ai1.state = 1;
+                  power_up_timer = 0;
               }
 
           }else{
