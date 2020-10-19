@@ -110,7 +110,7 @@ function draw() {
 
   else {
     background(img);
-    gridLines();
+    //gridLines();
 
     const row = floor(player.y / sclY);
     const col = floor(player.x / sclX);
