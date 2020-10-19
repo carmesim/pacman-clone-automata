@@ -171,17 +171,13 @@ function draw(){
         }
 
     }
-<<<<<<< HEAD
+
   
 
-    if (mouseIsPressed){
-      print('Mouse X: ', mouseX, 'Y: ', mouseY);    
-    }
+
 
     count += 1;
-=======
 
->>>>>>> 65a72bfb1cb7227ba75e37fa169aee594811b66d
 }
 
 // I believe that the obstacle checking will have to be inside this function
