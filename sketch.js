@@ -115,9 +115,12 @@ function draw() {
   else {
     background(img);
     //gridLines();
+    
+    keyboardInputs();
 
     const row = floor(player.y / sclY);
     const col = floor(player.x / sclX);
+
 
     player.move(dir);
     player.draw();
@@ -194,29 +197,33 @@ function draw() {
   }
 }
 
-function keyPressed() {
+function keyboardInputs() {
   let row = floor(player.y / sclY);
   let col = floor(player.x / sclX);
-  if (keyCode === UP_ARROW) {
+  if (keyIsDown(UP_ARROW)) {
     if (mapa[row + 3][col - 1] != 1) {
       dir = 0;
     }
-  } else if (keyCode === DOWN_ARROW) {
+  } else if (keyIsDown(DOWN_ARROW)) {
     if (mapa[row + 5][col - 1] != 1) {
       dir = 1;
     }
-  } else if (keyCode === LEFT_ARROW) {
+  } else if (keyIsDown(LEFT_ARROW)) {
     if (mapa[row + 4][col - 2] != 1) {
       dir = 2;
     }
-  } else if (keyCode === RIGHT_ARROW) {
+  } else if (keyIsDown(RIGHT_ARROW)) {
     if (mapa[row + 4][col] != 1) {
       dir = 3;
     }
-  } else if (keyCode == 32) { // se foi pressionado o espaço
+  } else{
+    return false; // prevent default
+  }
+}
+function keyPressed(){
+  if (keyCode == 32) { // se foi pressionado o espaço
     space_pressed = true;
   }
-  return false; // prevent default
 }
 
 function gridLines() {
