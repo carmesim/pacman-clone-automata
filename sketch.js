@@ -17,6 +17,8 @@ let ghost_btn;
 let power_up_timer = 0;
 let space_pressed = false;
 let finished = false;
+let won = 1; 
+let num_ghosts_left = 1;
 
 const _States     = {"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4}
 const _Directions = {"Up":0, "Down": 1, "Left": 2, "Right": 3}
@@ -61,6 +63,11 @@ function setup() {
 function draw(){
     background(img);
     gridLines();
+    if(num_ghosts_left == 0){
+      finished = true;
+      space_pressed = false;
+      won = true;
+    }
 
     //vou fazer um grande if aqui para travar o codigo para garantir que ele encerre
 
@@ -74,8 +81,11 @@ function draw(){
         //texto de derrota
         textSize(32);
         fill ('yellow');
-        text('Game Over', 88, map_height / 2);
-
+        if(won){
+            text('You Win !', 102, map_height / 2);  
+        }else{
+            text('Game Over', 88, map_height / 2);
+        }
         textSize(20);
         text('Pressione Espaço para reiniciar!', 36, 239);
 
@@ -125,7 +135,7 @@ function draw(){
 
         if (mapa[row+4][col - 1] == 2){
           player.state = 4; // Powered-up !
-          power_up_timer = 20;
+          power_up_timer = 30;
         }
         print(aut.isGhost)
         aut.update();
@@ -154,19 +164,19 @@ function draw(){
         count += 1;
 
 
-        if (pacMan_Ghost_Colision(row, col, ghost_row, ghost_col) == 1){ // houve colisão
+        if (pacMan_Ghost_Colision() == 1){ // houve colisão
 
-            finished = true;
-            space_pressed = false;
+            if(player.state == 4){
+              num_ghosts_left--;
+            }else{
+              finished = true;
+              space_pressed = false;
+              won = false;
+            }
+
         }
 
     }
-
-  
-
-
-
-    count += 1;
 
 }
 
@@ -239,9 +249,8 @@ function setGhostAut(){
 }
 
 
-function pacMan_Ghost_Colision (row, col, ghost_row, ghost_col) { //retorna 1 se o pacman bateu no fantasma
-
-  if (row == ghost_row && col == ghost_col){
+function pacMan_Ghost_Colision () { //retorna 1 se o pacman bateu no fantasma
+  if (dist(player.x, player.y, ai1.x, ai1.y) < 12.5){
     return 1;
   }
 

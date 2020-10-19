@@ -17,17 +17,24 @@ class automata{
     // this method will change the states visualization
     update(){
         if (this.isGhost){
-            if(this.pac.x > map_width/2){
-                this.colorA = "gray";
-                this.thicknessA =2;
-                this.colorB = "#64e539";
-                this.thicknessB =3;
-            }else{
-                this.colorA = "#64e539";
-                this.thicknessA =3;
-                this.colorB = "gray";
-                this.thicknessB =2;
+            //"Normal":1, "Chase":2, "Flee":3, "Powered-Up":4
+            switch(this.pac.state){
+                case 2:
+                    this.colorA = "#64e539";
+                    this.thicknessA =3;
+                    this.colorB = "gray";
+                    this.thicknessB =2;
+                    break;
+                case 3:
+                    this.colorA = "gray";
+                    this.thicknessA =2;
+                    this.colorB = "#64e539";
+                    this.thicknessB =3;
+                    break;
+                default:
+                    break;
             }
+
         }else{
             if(this.pac.state == 4){
                 this.colorA = "gray";
